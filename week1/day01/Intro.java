@@ -15,11 +15,26 @@ class Intro {
 
             // ! Object
 
-            // * Integer
-            // * Double
-            // * String
-            // * Boolean
-            // * Character
+            /*
+                * Integer
+                * Double
+                * Long
+                * String
+                * Boolean
+                * Character
+            */ 
+
+        // Operators
+
+            // * Mathematical
+            // * Comparison
+            // * Logical
+
+        // Conditionals
+
+        // Ternary
+
+        // Switch
 
             
             
