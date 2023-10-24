@@ -25,10 +25,12 @@ class Intro {
             */ 
 
         // Operators
-
-            // * Mathematical
-            // * Comparison
-            // * Logical
+            /*
+                * Mathematical
+                * Comparison
+                * Logical
+             */
+            
 
         // Conditionals
 
