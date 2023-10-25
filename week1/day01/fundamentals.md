@@ -7,6 +7,12 @@
 
 ## Lecture 
 
+## Objectives
+
+- Install java to use on your machine
+- Get familiar with the differences between static and dynamic languages
+- Learn the syntax for the Java language
+
 ### Whats new?
 
 - Strongly Typed vs Weakly typed
