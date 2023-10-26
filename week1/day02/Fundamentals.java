@@ -6,20 +6,41 @@ public class Fundamentals {
         System.out.println("Hello world");
     }
 
+    public void implicitTypeCastingExample() {
 
+        int i = 10;
+        double d = 20.25;
 
-    // Strings
+        double result = i + d; 
+    }
 
-    // String concatenation
+    public void explicitTypeCastingExample() {
 
-    // String.format
+        Double dd = 10.35;
+        // int i = (int) dd; 
 
-    // Equality check
+        String doubleNum = dd.toString();
 
-    // Methods
+    }
 
-    // signatures
+    // Methods -> access (static) return type name (parameters)
+    public int countAndSum(int end) {
+        int result = 0;
+        for (int i = 1; i < end; i++) {
+            result+=i;
+        }
 
-    // Overloading
+        return result;
+    }
+
+    
+    // Overloading - as long as the parameter types are different,you can use the same name
+        public void countAndSum(int i, int j) {
+            // I can loop through the array instead and get a similar result
+            // return ;
+            System.out.println(i + j);
+        }
+    // signatures -> name of the method and the arguments passed in
+        
 
 }

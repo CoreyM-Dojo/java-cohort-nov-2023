@@ -1,19 +1,23 @@
-console.log("Hello World")
+public class OfficeHour {
 
-let myName = "Corey"
+    public static void main(String[] args) {
+        System.out.println("Hello World");
 
-let myOccupation = "Instructor"
+        String myName = "Corey";
 
-let drinkPrice = 1.99
+        String myOccupation = "Instructor";
 
-let isOverPriced = false;
+        double drinkPrice = 3;
 
-if (drinkPrice > 2) {
-    isOverPriced = true
-} else {
-    isOverPriced = false
+        boolean isOverPriced = false;
+
+        if (drinkPrice > 2.00) {
+            isOverPriced = true;
+        } else {
+            isOverPriced = false;
+        }
+
+        System.out.println(isOverPriced ? "This drink is way too expensive!" : "This drink is alright");
+    }
+
 }
-
-console.log(isOverPriced ? "This drink is way too expensive!" : "This drink is alright")
-
-
