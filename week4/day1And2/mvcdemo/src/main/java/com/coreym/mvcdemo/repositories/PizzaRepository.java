@@ -12,4 +12,15 @@ public interface PizzaRepository extends CrudRepository<Pizza, Long> {
 	
 	ArrayList<Pizza> findAll();
 	
+	
+	// SELECT * FROM pizzas WHERE pizzaSize = size;
+	ArrayList<Pizza> findByPizzaSize(String size);
+	
+	// SELECT * FROM pizzas ORDER BY numOfToppings DESC WHERE pizzaType = pizzaType
+	Pizza findByPizzaTypeOrderByNumOfToppingsDesc(String pizzaType);
+	
+	
+	
+	
+	
 }

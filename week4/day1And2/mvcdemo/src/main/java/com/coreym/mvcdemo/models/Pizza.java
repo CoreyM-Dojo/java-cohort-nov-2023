@@ -13,6 +13,8 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -23,11 +25,19 @@ public class Pizza {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@Size(min=3, max=200)
+//	@NotNull - Checks if an input was not entered 
+//	@NotBlank - Trims the whitespace of the string and then checks the size
+//	@NotEmpty - Checks the length of the input and makes sure it is greater than 0
+	
+	@NotBlank
+	@Size(min=3, max=200, message="Pizza Type must be between 3 and 200 characters")
 	private String pizzaType;
 	
+	@NotBlank
 	@Size(min=3, max=200)
 	private String pizzaSize;
+	
+	@NotNull
 	@Min(1)
 	private Integer numOfToppings;
 	

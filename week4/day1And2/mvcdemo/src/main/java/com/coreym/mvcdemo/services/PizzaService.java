@@ -28,6 +28,10 @@ public class PizzaService {
 		return repo.save(pizza);
 	}
 	
+	public ArrayList<Pizza> findPizzasBySize(String size) {
+		return repo.findByPizzaSize(size);
+	}
+	
 	
 	
 	
