@@ -79,3 +79,45 @@
 
 ### Wrap-up
 - Tomorrow: Edit & Delete (Finishing Full Crud)
+
+# Week 4 Day 3 - Edit and Delete
+
+## Office Hour
+- Other uses of form:form
+- Q & A
+
+## Lecture
+
+### Objectives
+- Add Edit & Delete functionality to our project
+
+### RESTFul routing
+- convention agreed upon by the developer industry
+- meant to help a person recognize the purpose of a route on sight
+- Usually attached to the actions performed on a resource in our database
+- GET -> (ALL) Used when getting data/info from database
+// /pizzas
+- GET -> (ONE)
+// /pizzas/{id}
+- POST -> Used when creating or adding to a database
+// /pizzas
+- PUT -> Used when updating current data in a database
+// /pizzas/{id}
+- DELETE -> Used when removing data from the database
+// /pizzas/{id}
+- PATCH -> Similar to PUT but while a put request
+
+
+
+### Edit
+- uses repo.save()
+- Looks for "id" as one of the properties in the modelattribute
+- needs a special flag on the page to show validations
+
+### Delete
+- Pass the id of the item you want to delete from the database
+- @DeleteMapping
+
+## Wrap-up
+- Break week next week - NO INSTRUCTION SUPPORT
+- Week 5: Relationships and Login/Registration

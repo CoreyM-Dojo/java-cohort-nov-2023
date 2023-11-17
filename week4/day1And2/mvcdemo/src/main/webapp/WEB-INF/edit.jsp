@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!-- c:out ; c:forEach etc. -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- Formatting (dates) -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -7,7 +8,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!-- for rendering errors on PUT routes -->
 <%@ page isErrorPage="true"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,11 +21,13 @@
 <!-- change to match your file/naming structure -->
 </head>
 <body>
-	<div class="container">
-
-		<h1>Create A Pizza</h1>
-		<c:out value="${noPizza}"></c:out>
-		<form:form class="border border-dark p-3 bg-secondary text-light" action="/pizzas" method="POST" modelAttribute="pizza">
+	<div class="container p-3">
+		<h1>Update Pizza</h1>
+		<form:form class="border border-dark p-3 bg-secondary text-light"
+			action="/pizzas/${pizza.id}" method="post" modelAttribute="pizza">
+			<form:hidden path="id"/>
+			<!-- This hidden input is needed to create a put request -->
+			<input type="hidden" name="_method" value="put"/>
 			<div class="mb-3">
 				<form:label path="pizzaType" class="form-label">Pizza Type</form:label>
 				<form:input path="pizzaType" class="form-control" />
@@ -36,48 +38,16 @@
 				<form:select path="pizzaSize" items="${pizzaSizes}"></form:select>
 				<form:errors path="pizzaSize" />
 			</div>
-			
+
 			<div class="mb-3 d-flex flex-column">
 				<form:label path="toppings" class="form-label">Toppings</form:label>
 				<form:checkboxes path="toppings" items="${toppingsChoices}"></form:checkboxes>
+
 			</div>
 
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</form:form>
-
-		<table class="table table-striped table-dark mt-3">
-			<thead>
-				<tr>
-					<th scope="col">#</th>
-					<th scope="col">Pizza Type</th>
-					<th scope="col">Pizza Size</th>
-					<th scope="col">Toppings</th>
-					<th scope="col">Actions</th>
-					
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="pizza" items="${allPizzas}">
-					<tr>
-						<td><a href="/pizzas/${pizza.id}"> <c:out
-									value="${pizza.id}"></c:out>
-						</a></td>
-						<td><c:out value="${pizza.pizzaType}"></c:out></td>
-						<td><c:out value="${pizza.pizzaSize}"></c:out></td>
-						<td><c:out value="${pizza.numOfToppings}"></c:out></td>
-						<td>
-							<a href="/pizzas/edit/${pizza.id}">Edit</a>
-							<form action="/pizzas/${pizza.id}" method="post">
-								<input type="hidden" name="_method" value="delete"/>
-								<button>Delete</button>
-							</form>
-						</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
 	</div>
-</body>
-</html>
+
 </body>
 </html>

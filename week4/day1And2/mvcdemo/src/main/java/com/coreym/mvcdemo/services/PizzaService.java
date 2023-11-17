@@ -32,6 +32,17 @@ public class PizzaService {
 		return repo.findByPizzaSize(size);
 	}
 	
+	// Update -> uses repo.save(Pizza)
+	// checks for a property specifically called id
+	public Pizza updatePizza(Pizza pizza) {
+		return repo.save(pizza);
+	}
+	
+	// Delete
+	public void deletePizza(Long id) {
+		repo.deleteById(id);
+	}
+	
 	
 	
 	

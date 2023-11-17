@@ -37,9 +37,15 @@ public class Pizza {
 	@Size(min=3, max=200)
 	private String pizzaSize;
 	
-	@NotNull
 	@Min(1)
 	private Integer numOfToppings;
+	
+//	{
+//		pepperoni: 1,
+//		onions: 0,
+//		pineapple: 0
+//	}
+	private String[] toppings;
 	
 	@Column(updatable=false)
 	@DateTimeFormat(pattern="yyyy-MM-dd")
@@ -87,6 +93,16 @@ public class Pizza {
 
 	public void setNumOfToppings(Integer numOfToppings) {
 		this.numOfToppings = numOfToppings;
+	}
+	
+	
+
+	public String[] getToppings() {
+		return toppings;
+	}
+
+	public void setToppings(String[] toppings) {
+		this.toppings = toppings;
 	}
 
 	public Date getCreatedAt() {
