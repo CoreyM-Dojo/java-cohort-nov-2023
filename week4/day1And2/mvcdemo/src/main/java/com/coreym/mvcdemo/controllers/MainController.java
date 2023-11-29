@@ -30,9 +30,7 @@ public class MainController {
 		// @ModelAttribute - creates an empty Pizza object to attach to our form
 		ArrayList<Pizza> allPizzas = pizzaService.all();
 		model.addAttribute("allPizzas",allPizzas);
-		String[] toppingsChoices = {"pepperoni", "sausage", "salami", "pineapple", "bacon", "mushrooms", "green peppers", "chicken"};
 		String[] pizzaSizes = {"Small", "Medium", "Large", "Extra Large"};
-		model.addAttribute("toppingsChoices", toppingsChoices);
 		model.addAttribute("pizzaSizes", pizzaSizes);
 		return "index.jsp";
 	}
@@ -46,10 +44,6 @@ public class MainController {
 			return "redirect:/";
 		}
 		
-		for (String topping : onePizza.getToppings()) {
-			
-			System.out.println(topping);
-		}
 		
 		model.addAttribute("pizza", onePizza);
 		
@@ -67,14 +61,12 @@ public class MainController {
 		
 		
 		if (result.hasErrors()) {
-			String[] toppingsChoices = {"pepperoni", "sausage", "salami", "pineapple", "bacon", "mushrooms", "green peppers", "chicken"};
 			String[] pizzaSizes = {"Small", "Medium", "Large", "Extra Large"};
-			model.addAttribute("toppingsChoices", toppingsChoices);
 			model.addAttribute("pizzaSizes", pizzaSizes);
 			return "index.jsp";
 		}
 		
-		pizza.setNumOfToppings(pizza.getToppings().length);
+		
 		
 		pizzaService.createPizza(pizza);
 		return "redirect:/";
@@ -102,13 +94,11 @@ public class MainController {
 	public String updatePizza(@Valid @ModelAttribute Pizza pizza, BindingResult result, @PathVariable Long id, Model model  ) {
 		
 		if (result.hasErrors()) {
-			String[] toppingsChoices = {"pepperoni", "sausage", "salami", "pineapple", "bacon", "mushrooms", "green peppers", "chicken"};
 			String[] pizzaSizes = {"Small", "Medium", "Large", "Extra Large"};
-			model.addAttribute("toppingsChoices", toppingsChoices);
 			model.addAttribute("pizzaSizes", pizzaSizes);
 			return "edit.jsp";
 		}
-		pizza.setNumOfToppings(pizza.getToppings().length);
+	
 		pizzaService.updatePizza(pizza);
 		return "redirect:/";
 	}
