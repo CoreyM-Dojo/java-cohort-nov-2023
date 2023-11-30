@@ -11,13 +11,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.coreym.mvcdemo.models.Pizza;
+import com.coreym.mvcdemo.models.User;
 import com.coreym.mvcdemo.services.PizzaService;
+import com.coreym.mvcdemo.services.UserService;
 
 @RestController
 public class ApiController {
 	
 	@Autowired
 	public PizzaService service;
+	
+	@Autowired
+	public UserService uService;
 	
 	@PostMapping("/api/pizzas")
 	public Pizza createPizza(
@@ -42,6 +47,11 @@ public class ApiController {
 	@GetMapping("/api/pizzas/by-size/{size}")
 	public ArrayList<Pizza> getBySize(@PathVariable(value="size") String pizzaSize) {
 		return service.findPizzasBySize(pizzaSize);
+	}
+	
+	@GetMapping("/api/users")
+	public ArrayList<User> getAllUsers() {
+		return uService.all();
 	}
 	
 	

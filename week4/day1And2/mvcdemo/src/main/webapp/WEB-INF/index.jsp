@@ -37,10 +37,6 @@
 				<form:errors path="pizzaSize" />
 			</div>
 			
-			<div class="mb-3 d-flex flex-column">
-				<form:label path="toppings" class="form-label">Toppings</form:label>
-				<form:checkboxes path="toppings" items="${toppingsChoices}"></form:checkboxes>
-			</div>
 
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</form:form>
