@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.coreym.mvcdemo.models.Pizza;
 import com.coreym.mvcdemo.models.Topping;
 import com.coreym.mvcdemo.services.PizzaService;
 import com.coreym.mvcdemo.services.ToppingService;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
@@ -29,14 +31,23 @@ public class ToppingController {
 	private ToppingService tService;
 
 	@GetMapping("")
-	public String toppingForm(@ModelAttribute(value="topping") Topping topping, Model model) {
+	public String toppingForm(@ModelAttribute(value="topping") Topping topping, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+		if (session.getAttribute("loggedInUser") == null) {
+			redirectAttributes.addFlashAttribute("notLoggedIn", "You must be logged in to view this page");
+			return "redirect:/auth/login";
+		}
 		List<Pizza> allPizzas = pService.all();
 		model.addAttribute("allPizzas", allPizzas);
 		return "/toppings/createTopping.jsp";
 	}
 	
 	@PostMapping("")
-	public String createTopping(@Valid @ModelAttribute("topping") Topping topping, BindingResult result, Model model) {
+	public String createTopping(@Valid @ModelAttribute("topping") Topping topping, BindingResult result, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+		
+		if (session.getAttribute("loggedInUser") == null) {
+			redirectAttributes.addFlashAttribute("notLoggedIn", "You must be logged in to view this page");
+			return "redirect:/auth/login";
+		}
 		
 		if (result.hasErrors()) {
 			List<Pizza> allPizzas = pService.all();

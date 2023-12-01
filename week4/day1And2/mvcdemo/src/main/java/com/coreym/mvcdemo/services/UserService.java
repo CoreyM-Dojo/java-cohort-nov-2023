@@ -2,6 +2,7 @@ package com.coreym.mvcdemo.services;
 
 import java.util.ArrayList;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,5 +39,15 @@ public class UserService {
 	public void deleteUser(Long id) {
 		userRepo.deleteById(id);
 	}
+	
+	public User getByEmail(String email) {
+		return userRepo.findByEmail(email);
+	}
+	
+	// Password Security
+//	public Boolean isValid(User user) {
+//		BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+//		
+//	}
 
 }

@@ -12,4 +12,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
 	public ArrayList<User> findAll();
 	
+	// JPQL generated query -> SELECT * FROM users WHERE email = ?
+	public User findByEmail(String email);
+	
 }

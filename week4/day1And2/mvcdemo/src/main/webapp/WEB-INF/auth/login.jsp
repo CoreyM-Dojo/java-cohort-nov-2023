@@ -22,38 +22,20 @@
 </head>
 <body>
 	<div class="container">
-
-		<h1>Register</h1>
-		<form:form class="border border-dark p-3 bg-secondary text-light" action="/auth/registration" method="POST" modelAttribute="user">
-			<form:errors path="*"/>
-			<div class="mb-3">
-				<form:label path="firstName" class="form-label">First Name</form:label>
-				<form:input path="firstName" class="form-control" />
-				<form:errors path="firstName" />
-			</div>
-			<div class="mb-3">
-				<form:label path="lastName" class="form-label">Last Name</form:label>
-				<form:input path="lastName" class="form-control" />
-				<form:errors path="lastName" />
-			</div>
+		<c:out value="${notLoggedIn}"></c:out>
+		<h1>Login</h1>
+		<form:form class="border border-dark p-3 bg-secondary text-light" action="/auth/login" method="POST" modelAttribute="loginObj">
+				<form:errors path="email" />
 			<div class="mb-3">
 				<form:label path="email" class="form-label">Email</form:label>
 				<form:input type="email" path="email" class="form-control" />
-				<form:errors path="email" />
 			</div>
 			<div class="mb-3">
 				<form:label path="password" class="form-label">Password</form:label>
 				<form:input type="password" path="password" class="form-control" />
-				<form:errors path="password" />
-			</div>
-			<div class="mb-3">
-				<form:label path="confirmPassword" class="form-label">Confirm Password</form:label>
-				<form:input type="password" path="confirmPassword" class="form-control" />
-				<form:errors path="confirmPassword" />
 			</div>
 			
-
-			<button type="submit" class="btn btn-primary">Register</button>
+			<button type="submit" class="btn btn-primary">Login</button>
 		</form:form>
 
 	</div>

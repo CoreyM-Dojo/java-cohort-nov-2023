@@ -22,10 +22,17 @@
 </head>
 <body>
 	<div class="container">
+		<c:if test="${loggedInUser != null }">
+			<p>
+				Hello,
+				<c:out value="${loggedInUser}"></c:out>
+			</p>
+		</c:if>
 
 		<h1>Create A Pizza</h1>
 		<c:out value="${noPizza}"></c:out>
-		<form:form class="border border-dark p-3 bg-secondary text-light" action="/pizzas" method="POST" modelAttribute="pizza">
+		<form:form class="border border-dark p-3 bg-secondary text-light"
+			action="/pizzas" method="POST" modelAttribute="pizza">
 			<div class="mb-3">
 				<form:label path="pizzaType" class="form-label">Pizza Type</form:label>
 				<form:input path="pizzaType" class="form-control" />
@@ -36,7 +43,7 @@
 				<form:select path="pizzaSize" items="${pizzaSizes}"></form:select>
 				<form:errors path="pizzaSize" />
 			</div>
-			
+
 
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</form:form>
@@ -49,7 +56,7 @@
 					<th scope="col">Pizza Size</th>
 					<th scope="col">Toppings</th>
 					<th scope="col">Actions</th>
-					
+
 				</tr>
 			</thead>
 			<tbody>
@@ -61,13 +68,11 @@
 						<td><c:out value="${pizza.pizzaType}"></c:out></td>
 						<td><c:out value="${pizza.pizzaSize}"></c:out></td>
 						<td><c:out value="${pizza.numOfToppings}"></c:out></td>
-						<td>
-							<a href="/pizzas/edit/${pizza.id}">Edit</a>
+						<td><a href="/pizzas/edit/${pizza.id}">Edit</a>
 							<form action="/pizzas/${pizza.id}" method="post">
-								<input type="hidden" name="_method" value="delete"/>
+								<input type="hidden" name="_method" value="delete" />
 								<button>Delete</button>
-							</form>
-						</td>
+							</form></td>
 					</tr>
 				</c:forEach>
 			</tbody>
