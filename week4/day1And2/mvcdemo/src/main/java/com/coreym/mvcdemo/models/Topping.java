@@ -1,6 +1,7 @@
 package com.coreym.mvcdemo.models;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -11,7 +12,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -37,9 +39,13 @@ public class Topping {
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date updatedAt;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="pizza_id")
-	private Pizza pizza;
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(
+			name="pizzas_toppings", 
+			joinColumns=@JoinColumn(name="topping_id"), 
+			inverseJoinColumns=@JoinColumn(name="pizza_id")
+	)
+	private List<Pizza> pizzas;
 	
 	public Topping() {}
 
@@ -91,14 +97,16 @@ public class Topping {
 		this.updatedAt = updatedAt;
 	}
 
-	public Pizza getPizza() {
-		return pizza;
+	
+	
+	public List<Pizza> getPizzas() {
+		return pizzas;
 	}
 
-	public void setPizza(Pizza pizza) {
-		this.pizza = pizza;
+	public void setPizzas(List<Pizza> pizzas) {
+		this.pizzas = pizzas;
 	}
-	
+
 	@PrePersist
 	protected void onCreate() {
 		this.createdAt = new Date();

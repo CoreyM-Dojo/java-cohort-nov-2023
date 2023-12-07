@@ -12,6 +12,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
@@ -53,13 +55,20 @@ public class Pizza {
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date updatedAt;
 	
-	@OneToMany(mappedBy="pizza", fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(
+			name="pizzas_toppings", 
+			joinColumns=@JoinColumn(name="pizza_id"),
+			inverseJoinColumns=@JoinColumn(name="topping_id") 
+	)
 	private List<Topping> toppings;
-	public Pizza() {}
+	
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="user_id")
 	private User user;
+	
+	public Pizza() {}
 
 	public Pizza(@Size(min = 3, max = 200) String pizzaType, @Size(min = 3, max = 200) String pizzaSize,
 			@Min(1) Integer numOfToppings) {

@@ -27,6 +27,17 @@
     <p class="card-text">Number of Toppings: <c:out value="${pizza.numOfToppings }"></c:out></p>
     <a href="#" class="btn btn-primary">Go somewhere</a>
   </div>
+  <div class="container">
+  	<form action="/pizzas/add" method="POST">
+  		<input type="hidden" name="pizzaId" value="${pizza.id}"/>
+  		<select name="toppingId">
+  			<c:forEach var="oneTopping" items="${allToppings }">
+  				<option value="${oneTopping.id}">${oneTopping.toppingName}</option>
+  			</c:forEach>
+  		</select>
+  		<button class="btn btn-success">Add</button>
+  	</form>
+  </div>
 </div>
 </body>
 </html>

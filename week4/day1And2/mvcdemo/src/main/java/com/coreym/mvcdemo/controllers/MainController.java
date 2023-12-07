@@ -1,6 +1,7 @@
 package com.coreym.mvcdemo.controllers;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,11 +13,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.coreym.mvcdemo.models.Pizza;
+import com.coreym.mvcdemo.models.Topping;
 import com.coreym.mvcdemo.models.User;
+import com.coreym.mvcdemo.services.PizzaMakerService;
 import com.coreym.mvcdemo.services.PizzaService;
+import com.coreym.mvcdemo.services.ToppingService;
 import com.coreym.mvcdemo.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -30,6 +35,12 @@ public class MainController {
 	
 	@Autowired
 	public UserService userService;
+	
+	@Autowired
+	public ToppingService toppingService;
+	
+	@Autowired
+	public PizzaMakerService pizzaMakerService;
 	
 	@GetMapping("/")
 	public String home(@ModelAttribute Pizza pizza, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
@@ -58,6 +69,8 @@ public class MainController {
 			redirectAttributes.addFlashAttribute("notLoggedIn", "You must be logged in to view this page");
 			return "redirect:/auth/login";
 		}
+		
+		ArrayList<Topping> allToppings = toppingService.all();
 		Pizza onePizza = pizzaService.findOne(id);
 		
 		if (onePizza == null) {
@@ -67,6 +80,7 @@ public class MainController {
 		
 		
 		model.addAttribute("pizza", onePizza);
+		model.addAttribute("allToppings", allToppings);
 		
 		return "display.jsp";
 		
@@ -141,6 +155,13 @@ public class MainController {
 			return "redirect:/auth/login";
 		}
 		pizzaService.deletePizza(id);
+		return "redirect:/";
+	}
+	
+	// Create relationship between Pizza and topping
+	@PostMapping("/pizzas/add")
+	public String addToppingsToPizza(@RequestParam(value="pizzaId") Long pizzaId, @RequestParam(value="toppingId") Long toppingId) {
+		pizzaMakerService.addToppingsToPizza(pizzaId, toppingId);
 		return "redirect:/";
 	}
 
