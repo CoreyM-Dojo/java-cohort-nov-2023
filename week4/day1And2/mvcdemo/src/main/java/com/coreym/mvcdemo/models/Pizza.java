@@ -43,8 +43,6 @@ public class Pizza {
 	@Size(min=3, max=200)
 	private String pizzaSize;
 	
-	@Min(1)
-	private Integer numOfToppings;
 	
 
 	
@@ -64,17 +62,12 @@ public class Pizza {
 	private List<Topping> toppings;
 	
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="user_id")
-	private User user;
 	
 	public Pizza() {}
 
-	public Pizza(@Size(min = 3, max = 200) String pizzaType, @Size(min = 3, max = 200) String pizzaSize,
-			@Min(1) Integer numOfToppings) {
+	public Pizza(@Size(min = 3, max = 200) String pizzaType, @Size(min = 3, max = 200) String pizzaSize) {
 		this.pizzaType = pizzaType;
 		this.pizzaSize = pizzaSize;
-		this.numOfToppings = numOfToppings;
 	}
 
 	public Long getId() {
@@ -99,14 +92,6 @@ public class Pizza {
 
 	public void setPizzaSize(String pizzaSize) {
 		this.pizzaSize = pizzaSize;
-	}
-
-	public Integer getNumOfToppings() {
-		return numOfToppings;
-	}
-
-	public void setNumOfToppings(Integer numOfToppings) {
-		this.numOfToppings = numOfToppings;
 	}
 	
 

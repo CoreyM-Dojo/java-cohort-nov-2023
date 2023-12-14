@@ -73,9 +73,15 @@ public class MainController {
 		ArrayList<Topping> allToppings = toppingService.all();
 		Pizza onePizza = pizzaService.findOne(id);
 		
+		
+		
 		if (onePizza == null) {
 			redirectAttributes.addFlashAttribute("noPizza", "Pizza was not found");
 			return "redirect:/";
+		}
+		
+		for (Topping t : onePizza.getToppings()) {
+			System.out.println(t.getToppingName());
 		}
 		
 		
@@ -163,6 +169,12 @@ public class MainController {
 	public String addToppingsToPizza(@RequestParam(value="pizzaId") Long pizzaId, @RequestParam(value="toppingId") Long toppingId) {
 		pizzaMakerService.addToppingsToPizza(pizzaId, toppingId);
 		return "redirect:/";
+	}
+	
+	@GetMapping("/pizzas/remove/{pizzaId}/{toppingId}")
+	public String removeToppingFromPizza(@PathVariable(value="pizzaId") Long pizzaId, @PathVariable(value="toppingId") Long toppingId) {
+		pizzaMakerService.removeToppingsFromPizza(pizzaId, toppingId);
+		return "redirect:/pizzas/" + pizzaId;
 	}
 
 }

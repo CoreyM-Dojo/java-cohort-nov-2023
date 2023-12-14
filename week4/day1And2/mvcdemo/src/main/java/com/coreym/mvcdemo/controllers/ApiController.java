@@ -31,7 +31,7 @@ public class ApiController {
 			@RequestParam(value="numOfToppings") Integer toppings
 			) {
 		
-		Pizza newPizza = new Pizza(pizzaType, pizzaSize, toppings);
+		Pizza newPizza = new Pizza(pizzaType, pizzaSize);
 		
 		return service.createPizza(newPizza);
 		

@@ -57,9 +57,6 @@ public class User {
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date updatedAt;
 	
-	// One to many for pizzas
-	@OneToMany(mappedBy="user", fetch=FetchType.LAZY)
-	private List<Pizza> pizzas;
 	
 	public User() {}
 
@@ -127,13 +124,6 @@ public class User {
 		this.updatedAt = updatedAt;
 	}
 
-	public List<Pizza> getPizzas() {
-		return pizzas;
-	}
-
-	public void setPizzas(List<Pizza> pizzas) {
-		this.pizzas = pizzas;
-	}
 	
 	@PrePersist
 	protected void onCreate() {

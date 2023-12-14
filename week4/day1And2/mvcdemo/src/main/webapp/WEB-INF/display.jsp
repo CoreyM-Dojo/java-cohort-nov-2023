@@ -24,7 +24,6 @@
     	<c:out value="${pizza.pizzaType }"></c:out>
     </h5>
     <p class="card-text">Size: <c:out value="${pizza.pizzaSize }"></c:out></p>
-    <p class="card-text">Number of Toppings: <c:out value="${pizza.numOfToppings }"></c:out></p>
     <a href="#" class="btn btn-primary">Go somewhere</a>
   </div>
   <div class="container">
@@ -37,7 +36,17 @@
   		</select>
   		<button class="btn btn-success">Add</button>
   	</form>
+  	
   </div>
 </div>
+  	<div class="container">
+  		<h2>Included Toppings</h2>
+  		<c:forEach var="toppingOnPizza" items="${pizza.toppings }">
+  			<p>
+  				<c:out value="${toppingOnPizza.toppingName}"></c:out>
+  				<a href="/pizzas/remove/${pizza.id }/${toppingOnPizza.id}" class="btn btn-sm btn-dark text-danger">X</a>
+  			</p>
+  		</c:forEach>
+  	</div>
 </body>
 </html>

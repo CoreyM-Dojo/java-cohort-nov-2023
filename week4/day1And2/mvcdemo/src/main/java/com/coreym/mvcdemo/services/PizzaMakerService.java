@@ -26,4 +26,11 @@ public class PizzaMakerService {
 		onePizza.getToppings().add(oneTopping);
 		return pRepo.save(onePizza);
 	}
+	
+	public Pizza removeToppingsFromPizza(Long pizzaId, Long toppingId) {
+		Pizza onePizza = pRepo.findById(pizzaId).orElse(null);
+		Topping oneTopping = tRepo.findById(toppingId).orElse(null);
+		onePizza.getToppings().remove(oneTopping);
+		return pRepo.save(onePizza);
+	}
 }

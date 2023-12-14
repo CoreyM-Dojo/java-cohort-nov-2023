@@ -54,7 +54,6 @@
 					<th scope="col">#</th>
 					<th scope="col">Pizza Type</th>
 					<th scope="col">Pizza Size</th>
-					<th scope="col">Toppings</th>
 					<th scope="col">Actions</th>
 
 				</tr>
@@ -67,7 +66,6 @@
 						</a></td>
 						<td><c:out value="${pizza.pizzaType}"></c:out></td>
 						<td><c:out value="${pizza.pizzaSize}"></c:out></td>
-						<td><c:out value="${pizza.numOfToppings}"></c:out></td>
 						<td><a href="/pizzas/edit/${pizza.id}">Edit</a>
 							<form action="/pizzas/${pizza.id}" method="post">
 								<input type="hidden" name="_method" value="delete" />

@@ -11,29 +11,35 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Tacos</title>
+    <title>Home Page</title>
     <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/main.css"> <!-- change to match your file/naming structure -->
     <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/app.js"></script><!-- change to match your file/naming structure -->
 </head>
 <body>
-   <div class="container">
-   	<form:form action="/toppings" method="post" modelAttribute="topping">
-   		<div class="form-group">
-   			<form:label path="toppingName">Topping Name</form:label>
-   			<form:input path="toppingName"/>
-   		</div>
-   		<div class="form-group">
-   			<form:label path="toppingAmount">Topping Amount</form:label>
-   			<form:input path="toppingAmount"/>
-   		</div>
-   		<div class="form-group">
-   			<form:label path="pricePerOunce">Price per ounce</form:label>
-   			<form:input path="pricePerOunce"/>
-   		</div>
-   		<button class="btn btn-dark">Create</button>
-   	</form:form>
-   </div>
+  <table class="table table-dark">
+  	<thead>
+  		<tr>
+  			<th>Name</th>
+  			<th>Search</th>
+  		</tr>
+  	</thead>
+  	<tbody>
+  		<c:forEach var="pokemon" items="${pokemonList.results }">
+  			<tr>
+  				<td>
+  					<c:out value="${pokemon.name }"></c:out>
+  				</td>
+  				<td>
+  					<form action="/pokemon/get">
+  						<input type="hidden" name="url" value="${pokemon.url}" />
+  						<button class="btn btn-success">Search</button>
+  					</form>
+  				</td>
+  			</tr>
+  		</c:forEach>
+  	</tbody>
+  </table>
 </body>
 </html>
