@@ -57,10 +57,10 @@ public class ApiController {
 		return mService.update(requestBody);
 	}
 	
-	@DeleteMapping("/movies")
-	public String deleteMovie(@RequestBody Movie movie) {
-		mService.destroy(movie.getId());
-		return "Movie successfully deleted with id: " + movie.getId();
+	@DeleteMapping("/movies/{id}")
+	public String deleteMovie(@PathVariable Long id) {
+		mService.destroy(id);
+		return "Movie successfully deleted with id: " + id;
 	}
 	
 	// Reviews

@@ -19,6 +19,7 @@
 </head>
 <body>
   <h1>Hello Pokemon</h1>
-  <img src="${defaultSprite}" alt="Picture of a pokemon" />
+  <img src="${defaultSprite}" alt="Picture of a pokemon
+  " />
 </body>
 </html>

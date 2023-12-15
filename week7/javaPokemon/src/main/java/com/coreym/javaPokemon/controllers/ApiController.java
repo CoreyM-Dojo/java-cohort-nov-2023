@@ -1,10 +1,9 @@
 package com.coreym.javaPokemon.controllers;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -18,10 +17,10 @@ public class ApiController {
 	private final WebClient client = WebClient.create();
 
 	@GetMapping("/api/pokemon")
-	public PokemonList getAllPokemon() {
+	public PokemonList getAllPokemon(@RequestParam(value="offset", defaultValue="0", required=false) Integer offset) {
 		
 		PokemonList response = client.get()
-			.uri(API + "/pokemon")
+			.uri(API + "/pokemon?offset=" + offset)
 			.retrieve()
 			.bodyToMono(PokemonList.class)
 			.block();
@@ -37,6 +36,19 @@ public class ApiController {
 				.uri(url)
 				.retrieve()
 				.bodyToMono(Pokemon.class)
+				.block();
+
+		return response;
+	}
+	
+	@GetMapping("/api/pokemon/search")
+	public Pokemon fetchDataByName(String name) throws UnsupportedEncodingException {
+		System.out.println(API + "/pokemon/rhyhorn");
+		Pokemon response = client.get()
+				.uri(API + "/pokemon/" + name)
+				.retrieve()
+				.bodyToMono(Pokemon.class)
+				
 				.block();
 
 		return response;

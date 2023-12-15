@@ -18,8 +18,9 @@ public class MainController {
 	private ApiController apiController;
 	
 	@GetMapping("/")
-	public String Home(Model model) {
-		PokemonList response = apiController.getAllPokemon();
+	public String Home(@RequestParam(value="offset", defaultValue="0", required=false)Integer offset, Model model) {
+		PokemonList response = apiController.getAllPokemon(offset);
+		model.addAttribute("offsetValue", offset);
 //		for (Pokemon poke : response.getResults()) {
 //			System.out.println(poke.getName());
 //			System.out.println(poke.getUrl());
@@ -33,6 +34,13 @@ public class MainController {
 		Pokemon response = apiController.fetchData(url);
 		
 		model.addAttribute("defaultSprite", response.getSprites().getNewImageUrls().getOfficialArtworkSprites().getFront_default());
+		return "pokemon.jsp";
+	}
+	
+	@GetMapping("/pokemon/search")
+	public String searchPokemonByName(@RequestParam("pokemonName") String pokemonName, Model model) throws UnsupportedEncodingException {
+		Pokemon response = apiController.fetchDataByName(pokemonName.toLowerCase());
+//		model.addAttribute("defaultSprite", response.getSprites().getNewImageUrls().getOfficialArtworkSprites().getFront_default());
 		return "pokemon.jsp";
 	}
 
